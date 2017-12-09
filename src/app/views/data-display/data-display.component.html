@@ -1,0 +1,17 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <chart [options]="options"></chart>
+  </div>
+
+  <br>
+
+  <div class="row">
+      <table class="table">
+        <tr *ngFor="let res of array">
+          <td>{{res.date}}</td>
+          <td>{{res.value}}</td>
+        </tr>
+      </table>
+  </div>
+
+</div>

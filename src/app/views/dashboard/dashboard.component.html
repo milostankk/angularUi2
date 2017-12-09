@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+
+
+  <div class="row">
+    <label
+      style="text-align: center; vertical-align: middle; line-height: 33px; font-family: inherit; font-weight: 500;">Group</label>
+    <div class="col-3">
+      <div class="btn-group" ngbRadioGroup>
+        <label ngbButtonLabel class="btn-primary" *ngFor="let group of groups">
+          <input ngbButton (click)="groupClicked(group)" type="radio" value="{{group.name}}"> {{group.name}}
+        </label>
+      </div>
+    </div>
+
+    <div class="col-3" *ngIf="groupContent | arrayLength">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{dropDownSelection}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" *ngFor="let group of groupContent" (click)="groupChanged(group)">{{group}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6"></div>
+  </div>
+
+
+  <br>
+
+
+  <div class="row" *ngIf="groupBoss?.subgroup">
+    <label
+      style="text-align: center; vertical-align: middle; line-height: 33px; font-family: inherit; font-weight: 500">Subgroup</label>
+    <div class="col-3">
+      <div class="btn-group" ngbRadioGroup>
+        <label ngbButtonLabel class="btn-primary" *ngFor="let sub of subgroups">
+          <input ngbButton (click)="subgroupClicked(sub)" type="radio" value="{{sub.name}}"> {{sub.name}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+
+
+  <div class="animated fadeIn" *ngIf="groupBoss?.dateFrom">
+    <div class="row" style="width: 200px">
+      <label style="line-height: 3px; font-family: inherit; font-weight: 500">Date from</label>
+      <input  class="form-control" placeholder="yyyy-mm-dd" [ngModel]="date"
+             (ngModelChange)="dateFromChanged($event)"
+             name="dp" ngbDatepicker #d="ngbDatepicker">
+      <button class="input-group-addon" (click)="d.toggle()" type="button">
+        <img src="../../../assets/img/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+      </button>
+    </div>
+    <br>
+  </div>
+
+
+  <div class="animated fadeIn" *ngIf="groupBoss?.dateFrom">
+    <div class="row" style="width: 200px">
+      <label style="line-height: 3px; font-family: inherit; font-weight: 500">Date to</label>
+      <input [minDate]="minDate" class="form-control" placeholder="yyyy-mm-dd" [ngModel]="date"
+             (ngModelChange)="dateToChanged($event)" name="dp" ngbDatepicker #d="ngbDatepicker">
+      <button class="input-group-addon" (click)="d.toggle()" type="button">
+        <img src="../../../assets/img/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row" style="text-align: center;">
+    <div class="col-4"></div>
+    <div class="col-4" *ngIf="groupBoss?.checkForCompletion()">
+      <button class="btn btn-primary" (click)="groupsSelectionDone()" style="width: 100%">Generate</button>
+    </div>
+    <div class="col-4"></div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
