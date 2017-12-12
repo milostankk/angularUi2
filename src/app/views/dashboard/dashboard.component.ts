@@ -44,12 +44,11 @@ export class DashboardComponent implements OnInit {
 
   subgroupClicked(e) {
     this.groupBoss.subgroup.what = e.name;
-    this.groupBoss.dateFrom = new Date();
   }
-
 
   dateFromChanged(e) {
     const date = new Date(e.year, e.month - 1, e.day);
+    this.groupBoss.dateFrom = new Date();
     this.groupBoss.dateFrom = date;
     this.minDate = e;
   }
@@ -64,7 +63,6 @@ export class DashboardComponent implements OnInit {
     console.log(this.groupBoss);
     this.router.navigate(['../dataDisplay']);
   }
-
 
   getGroupIndex(group: string): number {
     return this.groups.map(function (x) {

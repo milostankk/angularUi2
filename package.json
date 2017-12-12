@@ -40,6 +40,8 @@
     "core-js": "2.5.1",
     "dragula": "3.7.2",
     "font-awesome": "^4.7.0",
+    "highcharts-export-csv": "^1.4.8",
+    "highcharts-exporting": "^0.1.2",
     "moment": "^2.19.1",
     "ng-select": "^1.0.0-rc.3",
     "ng2-ace-editor": "^0.3.1",

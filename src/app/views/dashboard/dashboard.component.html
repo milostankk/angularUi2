@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="col-3" *ngIf="groupContent | arrayLength">
+    <div class="col-3" *ngIf="groupContent?.length">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{dropDownSelection}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -34,7 +34,7 @@
       style="text-align: center; vertical-align: middle; line-height: 33px; font-family: inherit; font-weight: 500">Subgroup</label>
     <div class="col-3">
       <div class="btn-group" ngbRadioGroup>
-        <label ngbButtonLabel class="btn-primary" *ngFor="let sub of subgroups">
+        <label disabled="true" ngbButtonLabel class="btn-primary" *ngFor="let sub of subgroups">
           <input ngbButton (click)="subgroupClicked(sub)" type="radio" value="{{sub.name}}"> {{sub.name}}
         </label>
       </div>
@@ -45,7 +45,7 @@
   <br>
 
 
-  <div class="animated fadeIn" *ngIf="groupBoss?.dateFrom">
+  <div class="animated fadeIn" *ngIf="groupBoss?.subgroup?.what">
     <div class="row" style="width: 200px">
       <label style="line-height: 3px; font-family: inherit; font-weight: 500">Date from</label>
       <input  class="form-control" placeholder="yyyy-mm-dd" [ngModel]="date"
@@ -59,7 +59,7 @@
   </div>
 
 
-  <div class="animated fadeIn" *ngIf="groupBoss?.dateFrom">
+  <div class="animated fadeIn" *ngIf="groupBoss?.subgroup?.what">
     <div class="row" style="width: 200px">
       <label style="line-height: 3px; font-family: inherit; font-weight: 500">Date to</label>
       <input [minDate]="minDate" class="form-control" placeholder="yyyy-mm-dd" [ngModel]="date"
@@ -71,13 +71,15 @@
   </div>
 
 
+<div class="animated fadeIn">
   <div class="row" style="text-align: center;">
     <div class="col-4"></div>
-    <div class="col-4" *ngIf="groupBoss?.checkForCompletion()">
+    <div class="col-4" *ngIf="groupBoss?.subgroup?.what">
       <button class="btn btn-primary" (click)="groupsSelectionDone()" style="width: 100%">Generate</button>
     </div>
     <div class="col-4"></div>
   </div>
+</div>
 
 
 </div>

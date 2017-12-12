@@ -1,17 +1,32 @@
 <div class="animated fadeIn">
+
   <div class="row">
-    <chart [options]="options"></chart>
+    <div class="col-12">
+      <chart id="chart" style="width: 100% !important; display: block" [options]="options"></chart>
+    </div>
   </div>
 
   <br>
 
+ <!-- <div class="row">
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="exortToCSV">Export to CSV</button>
+    </div>
+  </div>-->
+
+
+  <br>
+  <br>
+
   <div class="row">
-      <table class="table">
-        <tr *ngFor="let res of array">
-          <td>{{res.date}}</td>
-          <td>{{res.value}}</td>
-        </tr>
-      </table>
+    <table class="table table-striped">
+      <th>Date</th>
+      <th>Value</th>
+      <tr *ngFor="let res of array">
+        <td>{{res.date | date: 'yyyy-MM-dd HH:mm' : 'utc'}}</td>
+        <td>{{res.value}}</td>
+      </tr>
+    </table>
   </div>
 
 </div>

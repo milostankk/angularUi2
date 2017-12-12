@@ -71,11 +71,13 @@ import {ChartModule} from 'angular2-highcharts';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DataService} from './data.service';
 
-
+declare var require: any;
+/*
 declare var require: any;
 export function highchartsFactory() {
   return require('highcharts');
 }
+*/
 
 
 
@@ -99,7 +101,7 @@ export function highchartsFactory() {
   providers: [DataService, {
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
-    useFactory: highchartsFactory
+   // useFactory: highchartsFactory
   }],
   bootstrap: [ AppComponent ]
 })

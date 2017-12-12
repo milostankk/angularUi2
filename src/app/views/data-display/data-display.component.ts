@@ -1,7 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../data.service';
-import {HttpModule} from '@angular/http';
-import {HttpClientModule} from '@angular/common/http';
+import * as Highcharts from 'highcharts';
+import * as HighChartsExporting from 'highcharts-exporting';
+import * as HighchartsOfflineExporting from 'highcharts-export-csv';
+
+
+HighChartsExporting(Highcharts);
+HighchartsOfflineExporting(Highcharts);
 
 @Component({
   selector: 'app-data-display',
@@ -17,30 +22,49 @@ export class DataDisplayComponent implements OnInit {
   constructor(private dataService: DataService) {
     this.dataService.getData().subscribe(res => this.result = res);
     this.array = this.result;
+    Highcharts.dateFormat('Month: %m Day: %d Year: %Y', 20, false);
   }
 
-  setData(): void {
-   /* this.dataService.getData().subscribe(res => this.result = res);*/
-  }
 
 
   ngOnInit() {
-    this.setData();
     this.options = {
-      title: {text: 'awesome chart'},
+      chart: {
+        name: 'awesome',
+        backgroundColor: '#F2F4F8',
+        renderTo: 'chart',
+        zoomType: 'x'
+      },
+    /*  exporting: {
+        csv: {
+          dateFormat: '%Y-%m-%d'
+        }
+      },*/
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 800
+          },
+          chartOptions: {
+            legend: {
+              enabled: false
+            }
+          }
+        }]
+      },
+      title: {text: 'Awesome Chart'},
       series: [{
-        name: 'stoka',
+        showInLegend: false,
+        name: 'point',
         data: this.result.map(function (point) {
           return [point.date, point.value];
         }),
         pointInterval: 24 * 3600 * 1000,
       }],
       xAxis: {
-      /*  categories: this.result.forEach(function (x) {
-          return x.date;
-        }),*/
-        startOnTick: true,
         type: 'datetime',
+        startOnTick: true,
         minTickInterval: 20000,
         tickPositioner: function (min, max) {
           const ticks = this.series[0].processedXData.slice();
