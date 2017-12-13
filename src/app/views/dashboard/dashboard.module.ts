@@ -11,7 +11,6 @@ import {ChartModule} from 'angular2-highcharts';
 import {DataService} from '../../data.service';
 import {HttpModule} from '@angular/http';
 
-declare var require: any;
 export function highchartsFactory() {
   return require('highcharts');
 }
@@ -23,7 +22,7 @@ export function highchartsFactory() {
     NgbModule.forRoot(),
     CommonModule,
     FormsModule,
-    ChartModule.forRoot(require('highcharts')),
+     ChartModule.forRoot(require('highcharts')),
     HttpModule
   ],
   declarations: [ DashboardComponent, ArrayLengthPipe ],
